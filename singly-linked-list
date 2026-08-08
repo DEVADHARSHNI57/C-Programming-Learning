@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct  lnode{
+    int data;
+    struct lnode* next; // self referential structure
+};
+
+typedef struct lnode node;
+
+node* head = NULL;
+
+void insertAtBegining(int val){
+    node* newNode = (node*)malloc(sizeof(node));
+    if(newNode == NULL){
+        printf("Out of memory");
+        return;
+    }
+    newNode -> data = val;
+    if(head == NULL){
+        newNode -> next = NULL;
+        head = newNode;
+    } else {
+        newNode -> next = head;
+        head = newNode;
+    }
+}
+void display(){
+    if(head == NULL){
+        printf("List is empty");
+        return;
+    }
+    node* temp = head;
+
+    printf("Elements in the list are: ");
+    while(temp != NULL){
+        printf("%d\t", temp -> data);
+        temp = temp -> next;
+    }
+
+
+}
+
+
+
+int choice,val,pos;
+int main()
+{
+    while(1){
+    printf("\n1. Insert at Begining\n");
+    printf("2. Display the List\n");
+    printf("3. Insert at specific position\n");
+    printf("4. Delete from a specified postion\n");
+    printf("5. Exit\n");
+    printf("-----------------------------------------\n");
+
+    printf("\nEnter your choice:\t");
+    scanf("%d", &choice);
+
+    switch(choice){
+        case 1 : printf("Enter the data:\t");
+                 scanf("%d",&val);
+                 insertAtBegining(val);
+                 break;
+
+        case 2 : display();
+                 break;
+
+        case 3 : printf("Enter the position:\t");
+                 scanf("%d", & pos);
+                 printf("\nEnter the data;\t");
+                 scanf("%d", &val);
+                 //insertAtposition(pos,val);
+                 break;
+
+        case 4 : printf("\nEnter the position:\t");
+                 scanf("%d", &pos);
+                 //deleteAtposition(pos);
+                 break;
+        case 5 : exit(0);
+
+        default : printf("\nWrong choice");
+    }
+
+    }
+    return 0;
+}
